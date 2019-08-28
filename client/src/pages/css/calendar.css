@@ -254,6 +254,11 @@
   }
 
   .newEvent{
-    /* padding-top :10px; */
+    height: 10px;
+    
+  }
+
+  .btnNewEvent{
+    padding-top :10px;
     
   }

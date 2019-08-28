@@ -1,10 +1,14 @@
 import React from "react";
 import {format, addMonths, subMonths, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isSameDay, isSameMonth, parse, addDays} from "date-fns";
+import { Link } from "react-router-dom";
 
 import events from "../events.json";
 import PTags from "../components/pTags/PTags.js";
+import Modal from "../components/Modal/Modal";
+import CreateEvent from "../components/createEvent/createEvent.js"
 
 import "./css/calendar.css";
+// import "../components/Modal/Modal.css"
 
 
 class Calendar extends React.Component {
@@ -13,12 +17,40 @@ class Calendar extends React.Component {
         events,
         currentMonth: new Date(),
         selectedDate: new Date(),
+        show : false
         
   };
   
 
-  
+  openModalHandler = () => {
+    this.setState({
+        show: true
+    });
+}
 
+closeModalHandler = () => {
+    this.setState({
+        show: false
+    });
+}
+
+  
+renderModal(){
+    return (
+      <div className="newevent">      
+      {/* <button className="col-2 btn btn-lg btn-link" onClick={this.openModalHandler}>New Event</button> */}
+
+      <Modal
+          className="modal"
+          show={this.state.show}
+          close={this.closeModalHandler}>
+              <CreateEvent
+                close = {this.closeModalHandler}
+               />
+      </Modal>
+  </div>
+    );
+}
   renderHeader() {
     const dateFormat = "MMMM yyyy";
     
@@ -26,6 +58,9 @@ class Calendar extends React.Component {
        
 
         <div className="header row flex-middle">
+
+          <button className="col-2 btn btn-lg btn-link" onClick={this.openModalHandler}>New Event</button>
+          
           <div className="col col-start">
             <div className="icon" onClick={this.prevMonth}>
               chevron_left
@@ -131,7 +166,7 @@ class Calendar extends React.Component {
     this.setState({
         selectedDate: day
       });
-    //   console.log(this.state.selectedDate);
+    
   }
 
 
@@ -151,14 +186,12 @@ class Calendar extends React.Component {
   render() {
     return (
       <div>
-        <div className="col-2 col-start">
-          <div className = "newEvent"><a href="#" >New event</a></div>
-        </div>
+        { this.state.show ? this.renderModal():""}
 
         <div className=" container calendar">
-        {this.renderHeader()}
-        {this.renderDays()}
-        {this.renderCells()}
+          {this.renderHeader()}
+          {this.renderDays()}
+          {this.renderCells()}
       </div>
       </div>
         

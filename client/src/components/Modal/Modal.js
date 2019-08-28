@@ -1,28 +1,32 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
+import "./Modal.css"
 
 
-
-class ModalForm extends React.Component{
-
-    render(){
-        return {
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={handleClose}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        }
-    }
+const Modal = (props) => {
+  return (
+      <div>
+          <div className="modal-wrapper"
+              style={{
+                  // transform: props.show ? 'translateY(0vh)' : 'translateY(-100vh)',
+                  height : props.show ? '100%' : "0",
+                  opacity: props.show ? '1' : '0'
+              }}>
+              <div className="modal-header">
+                  <h3>Create Event</h3>
+                  <span className="close-modal-btn" onClick={props.close}>×</span>
+              </div>
+              <div className="modal-body">
+                  {props.children}
+                  
+              </div>
+              {/* <div className="modal-footer">
+                  <button className="btn-cancel" onClick={props.close}>CLOSE</button>
+                  <button className="btn-continue">CONTINUE</button>
+              </div> */}
+          </div>
+      </div>
+  )
 }
 
-export default ModalForm;
+
+export default Modal;

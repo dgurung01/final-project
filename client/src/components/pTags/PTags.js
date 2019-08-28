@@ -4,17 +4,7 @@ import React from "react";
 import "./ptag.css";
 
 class PTags extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
-    checkDateRange (){
-        const startDate = this.props.event.startDate;
-        const endDate = this.props.event.endDate;
-
-        // const noOfDays = dateFns.differenceInDays(startDate,endDate);
-
-    }
+    
     render(){
         return (            
             <p className = "eventTag" 

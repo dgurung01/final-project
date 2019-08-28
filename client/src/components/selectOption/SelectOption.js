@@ -19,11 +19,11 @@ import "./selectOption.css";
                                     >
                     {props.options.map(optionItem =>(
                         <option 
-                          id = {optionItem.id} 
-                          value = {optionItem.option}
-                          key = {optionItem.id}     
-                          name = {props.name}                     
-                        > {optionItem.option}
+                          id = {optionItem.value} 
+                          value = {optionItem.value}
+                          key = {optionItem.value}     
+                          
+                        > {optionItem.label}
                         </option>
                         
                     ))}
