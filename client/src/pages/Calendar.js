@@ -38,7 +38,7 @@ closeModalHandler = () => {
 renderModal(){
     return (
       <div className="newevent">      
-      {/* <button className="col-2 btn btn-lg btn-link" onClick={this.openModalHandler}>New Event</button> */}
+      
 
       <Modal
           className="modal"
@@ -60,7 +60,7 @@ renderModal(){
         <div className="header row flex-middle">
 
           <button className="col-2 btn btn-lg btn-link" onClick={this.openModalHandler}>New Event</button>
-          
+
           <div className="col col-start">
             <div className="icon" onClick={this.prevMonth}>
               chevron_left
