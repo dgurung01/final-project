@@ -1,0 +1,7 @@
+.eventTag{
+    background-color: #63ff1a;
+    border-radius: 5pt;
+    z-index: 1;
+    /* -webkit-column-span: all; /* Chrome, Safari, Opera */
+    /* column-span: all;  */
+}
