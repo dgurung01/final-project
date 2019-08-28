@@ -1,0 +1,31 @@
+[{"id" : 1,
+   "option" : "General"  
+ },
+ {"id" : 2,
+    "option" : "Work"  
+  },
+  {"id" : 3,
+    "option" : "Birthday"  
+  },
+  {"id" : 4,
+    "option" : "Invite"  
+  },
+  {"id" : 5,
+    "option" : "Bills"  
+  },
+  {"id" : 6,
+    "option" : "Home"  
+  },
+  {"id" : 7,
+    "option" : "School"  
+  },
+  {"id" : 8,
+    "option" : "Phone"  
+  },
+  {"id" : 9,
+    "option" : "Doctor"  
+  },
+  {"id" : 10,
+    "option" : "Pet"  
+  }
+]
