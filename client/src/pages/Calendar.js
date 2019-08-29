@@ -1,11 +1,12 @@
 import React from "react";
 import {format, addMonths, subMonths, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isSameDay, isSameMonth, parse, addDays} from "date-fns";
-import { Link } from "react-router-dom";
 
-import events from "../events.json";
+
+// import events from "../events.json";
 import PTags from "../components/pTags/PTags.js";
 import Modal from "../components/Modal/Modal";
-import CreateEvent from "../components/createEvent/createEvent.js"
+import CreateEvent from "../components/createEvent/createEvent.js";
+import API from "../utils/API";
 
 import "./css/calendar.css";
 // import "../components/Modal/Modal.css"
@@ -14,7 +15,7 @@ import "./css/calendar.css";
 class Calendar extends React.Component {
   
   state = {
-        events,
+        events : [],
         currentMonth: new Date(),
         selectedDate: new Date(),
         show : false
@@ -26,31 +27,36 @@ class Calendar extends React.Component {
     this.setState({
         show: true
     });
-}
+  }
 
-closeModalHandler = () => {
+  closeModalHandler = () => {
     this.setState({
         show: false
     });
-}
+  }
+
+  componentWillMount = () => {
+    this.getEvents();
+    
+  }
 
   
-renderModal(){
+  renderModal(){
     return (
       <div className="newevent">      
-      
-
-      <Modal
-          className="modal"
-          show={this.state.show}
-          close={this.closeModalHandler}>
-              <CreateEvent
-                close = {this.closeModalHandler}
-               />
-      </Modal>
-  </div>
+        <Modal
+            className="modal"
+            show={this.state.show}
+            close={this.closeModalHandler}>
+                <CreateEvent
+                  close = {this.closeModalHandler}
+                />
+        </Modal>
+      </div>
     );
-}
+  }
+
+
   renderHeader() {
     const dateFormat = "MMMM yyyy";
     
@@ -82,9 +88,11 @@ renderModal(){
 
 
   renderDays() {
-    const dateFormat = "dddd";
+    const dateFormat = "iiii";
     const days = [];
     let startDate = startOfWeek(this.state.currentMonth);
+    
+   
     for (let i = 0; i < 7; i++) {
       days.push(
         <div className="col col-center" key={i}>
@@ -105,7 +113,7 @@ renderModal(){
 
     const eventList = this.state.events;
 
-    
+    console.log(eventList);
 
     const dateFormat = "d";
     const rows = [];
@@ -118,9 +126,12 @@ renderModal(){
     for (let i = 0; i < 7; i++) {
         formattedDate = format(day, dateFormat);
         
+       
         const cloneDay = day;
-        const daysEvents = eventList.filter((eventOne) => eventOne.startDate === format(cloneDay, "MM-dd-yyyy"));
+        console.log(cloneDay);
+        const daysEvents = eventList.filter((eventOne) => eventOne.startDate === cloneDay);
         
+        console.log(daysEvents);
 
         days.push(
         <div
@@ -130,7 +141,8 @@ renderModal(){
                 : isSameDay(day, selectedDate) ? "selected" : ""
             }`}
             key={day}
-            onClick={() => this.onDateClick(parse(cloneDay))}
+            onClick={() => this.onDateClick(parse(cloneDay,'MM/dd/yyyy',
+            new Date()))}
         >
            
            <div className = "eventDiv">
@@ -183,6 +195,22 @@ renderModal(){
       });
   }
 
+  getEvents = () => {
+    API.getEvents()
+    .then(res =>{
+      console.log(res.data);
+      this.setState({
+        events: res.data
+      });     
+    })
+    .catch(() =>
+      this.setState({
+        Events: []
+      })
+    );
+};
+
+  
   render() {
     return (
       <div>

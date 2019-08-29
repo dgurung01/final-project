@@ -1,29 +1,30 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import "./selectOption.css";
     
-//class Select extends React.Component{
-    function Select (props){
-    // render(){
-        console.log(props);
+class Select extends React.Component{
+   
+    render(){
+        console.log(this.props);
        
         return(
             
             <div className="option col-4">
                 <select                   
-                    id = {props.name}
-                    name = {props.name}
-                    value = {props.value}
-                    onChange = {props.handleInputChange}                  
+                    id = {this.props.name}
+                    name = {this.props.name}
+                    value = {this.props.value}
+                    onChange = {this.props.handleInputChange}                  
                     className="form-control col-12"
                                     >
-                    {props.options.map(optionItem =>(
+                    {this.props.options.map(optionItem =>(
                         <option 
-                          id = {optionItem.value} 
-                          value = {optionItem.value}
-                          key = {optionItem.value}     
+                          id = {optionItem.id} 
+                          value = {optionItem.id}
+                          key = {optionItem.id}     
                           
-                        > {optionItem.label}
+                        > {optionItem.option}
                         </option>
                         
                     ))}
@@ -32,7 +33,11 @@ import "./selectOption.css";
             </div>
         );
 
-    // }
+    }
 }
 
+Select.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    show: PropTypes.bool.isRequired
+  };
 export default Select;
