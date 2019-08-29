@@ -3,8 +3,8 @@ import {format, addHours} from "date-fns";
 
 import Header from "../header/header.js";
 import "./createEvent.css";
-// import Select from "../selectOption/SelectOption.js";
- import Select from "react-select";
+//import Select from "../selectOption/SelectOption";
+//  import Select from "react-select";
 
 import API from "../../utils/API.js"
 
@@ -37,7 +37,7 @@ class Event extends React.Component{
         }
         
         
-        // this.handleInputChange = this.handleInputChange.bind(this);
+        
     
     }
 
@@ -68,13 +68,13 @@ class Event extends React.Component{
     }
 
     handleInputChange = ev =>{
-        console.log("test1");
+       
         let value = ev.target.value;
-        console.log(value);
+       
         const name = ev.target.name;
-        console.log(name);
+        
 
-        // this.setState({[name]:value});
+        
         this.setState({event : {...this.state.event, [name] : value}});
         
     }
@@ -83,7 +83,7 @@ class Event extends React.Component{
         let value = ev.target.value;
 
         this.setState({event : {...this.state.event, remind : value}});
-        console.log(this.state.event.remind);
+      
     }
 
     componentDidMount (){
