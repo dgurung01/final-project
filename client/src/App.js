@@ -11,7 +11,6 @@ import Event from "./components/createEvent/createEvent";
 import Todo from "./pages/Todo";
 
 
-<<<<<<< HEAD
 function App() {
 
   return (
@@ -34,8 +33,6 @@ class App extends React.Component{
     return(
 >>>>>>> 23ada20be58ebf80693f49d2207d9b28fa7a482a
       <div>
-      {/* <Header toggleAlert={this.toggleAlert} /> */}
-      <div className="container">
         <Navbar />
 <<<<<<< HEAD
         <Wrapper>
