@@ -131,7 +131,7 @@
     text-transform: uppercase;
     font-weight: 700;
     font-size: 115%;
-    padding: 1.5em 0;
+    padding: 1.2em 0;
     border-bottom: 1px solid var(--border-color);
     background: rgb(242, 242, 245);
   }
@@ -141,6 +141,10 @@
     transition: .15s ease-out;
   }
   
+  .calendar .row {
+    padding:0
+  }
+
   .calendar .header .icon:hover {
     transform: scale(1.75);
     transition: .25s ease-out;
@@ -254,6 +258,11 @@
   }
 
   .newEvent{
-    /* padding-top :10px; */
+    height: 10px;
+    
+  }
+
+  .btnNewEvent{
+    padding-top :10px;
     
   }

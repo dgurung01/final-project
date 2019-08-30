@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
+import Event from "./components/createEvent/createEvent"
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/calendar" component={Calendar} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/home" component={Home} />
+          <Route exact path="/event" component={Event} />
         </Wrapper>
         <Footer />
       </div>
