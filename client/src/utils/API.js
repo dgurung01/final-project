@@ -19,7 +19,7 @@ export default {
   },
 
   getEvents : function(){
-    console.log("get");
+    
     return  axios.get("/api/events");
   }
 };

@@ -6,11 +6,12 @@ import "./ptag.css";
 class PTags extends React.Component{
     
     render(){
+       
         return (            
             <p className = "eventTag" 
                id = {this.props.event.id}
-               key = {this.props.key}>
-                {this.props.event.name}
+               key = {this.props.event.key}>
+                {this.props.event.eventName}
             </p>
         );
     }
