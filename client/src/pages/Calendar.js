@@ -113,8 +113,7 @@ class Calendar extends React.Component {
 
     const eventList = this.state.events;
 
-    console.log(eventList);
-
+    
     const dateFormat = "d";
     const rows = [];
     let days = [];
@@ -128,10 +127,9 @@ class Calendar extends React.Component {
         
        
         const cloneDay = day;
-        console.log(cloneDay);
-        const daysEvents = eventList.filter((eventOne) => eventOne.startDate === cloneDay);
         
-        console.log(daysEvents);
+        const daysEvents = eventList.filter((eventOne) => (eventOne.startDate).split("T")[0] === format(cloneDay,"yyyy-MM-dd"));
+                
 
         days.push(
         <div
@@ -146,7 +144,7 @@ class Calendar extends React.Component {
         >
            
            <div className = "eventDiv">
-                {daysEvents.map(today => (    
+                {daysEvents.map(today => (                  
                    <PTags
                    event = {today}/>
 
@@ -197,8 +195,7 @@ class Calendar extends React.Component {
 
   getEvents = () => {
     API.getEvents()
-    .then(res =>{
-      console.log(res.data);
+    .then(res =>{     
       this.setState({
         events: res.data
       });     
