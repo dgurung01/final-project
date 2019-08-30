@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "gura4529",
-    "database": "Planner",
+    "password": "unhdb1",
+    "database": "planner",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
