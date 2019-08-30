@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import Event from "./components/createEvent/createEvent";
+import Todo from "./pages/Todo";
 
 
 class App extends React.Component{
@@ -17,7 +18,7 @@ class App extends React.Component{
     return(
       <div className="container">
       {/* <Route exact path="/" render={() => <Redirect to="/Home" />} /> */}
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={About} />
     </div>
     )
 
@@ -30,9 +31,11 @@ class App extends React.Component{
       <div className="container">
         <Navbar />
         <Route exact path="/about" component={About} />
-      <Route exact path="/calendar" component={Calendar} />
-      <Route exact path="/search" component={Search} />
-      <Route exact path="/event" component={Event} />
+        <Route exact path="/calendar" component={Calendar} />
+        <Route exact path="/search" component={Search} />
+        <Route exact path="/event" component={Event} />
+        <Route exact path="/todo" component={Todo} />
+
         {/* {this.state.isAlertOpen ? <Alert /> : null} */}
       </div>
       </div>
@@ -45,8 +48,8 @@ class App extends React.Component{
       <Switch>
       <div className="App">
         <Route exact path="/" component={this.LoginContainer}/>
-        <Route exact path = "/(calendar)" component={this.DefaultContainer}/>
-        <Route exact path = "/(about)" component={this.DefaultContainer}/>
+        <Route component={this.DefaultContainer}/>
+        {/* <Route exact path = "/(about)" component={this.DefaultContainer}/> */}
     
       </div>
       </Switch>
@@ -56,6 +59,7 @@ class App extends React.Component{
 
 
 }
+
 // function App() {
  
 //   return (
