@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "unhdb1",
-    "database": "Planner",
+    "database": "planner",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false

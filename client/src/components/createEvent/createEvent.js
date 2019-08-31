@@ -3,7 +3,8 @@ import {format, addHours} from "date-fns";
 
 import Header from "../header/header.js";
 import "./createEvent.css";
-import Select from "../selectOption/SelectOption.js";
+//import Select from "../selectOption/SelectOption";
+//  import Select from "react-select";
 
 import API from "../../utils/API.js"
 
@@ -25,7 +26,7 @@ class Event extends React.Component{
                 repeat : "",
                 location : "",
                 notes : "",
-                remind : "At time of event",
+                remind : "",
                 type : "",
                 invities : []
             },        
@@ -36,13 +37,13 @@ class Event extends React.Component{
         }
         
         
-        // this.handleInputChange = this.handleInputChange.bind(this);
+        
     
     }
 
     setCurrentDate = () =>{
        
-        const dateFormat = "YYYY-MM-DD";
+        const dateFormat = "yyyy-MM-dd";
         const timeFormat = "HH:mm";
         const date = new Date();
 
@@ -67,21 +68,22 @@ class Event extends React.Component{
     }
 
     handleInputChange = ev =>{
-        console.log("test1");
+       
         let value = ev.target.value;
-        console.log(value);
+       
         const name = ev.target.name;
-        console.log(name);
+        
 
-        // this.setState({[name]:value});
+        
         this.setState({event : {...this.state.event, [name] : value}});
         
     }
 
-    handleSelectChange = selectedOption =>{
-        console.log("test");
-        this.setState({event : {...this.state.event, repeat : selectedOption}});
-        console.log(selectedOption);
+    handleSelectRemind = ev =>{        
+        let value = ev.target.value;
+
+        this.setState({event : {...this.state.event, remind : value}});
+      
     }
 
     componentDidMount (){
@@ -91,7 +93,7 @@ class Event extends React.Component{
 
 
      onCancelClick = () => {
-
+        this.props.close();
     }
 
     onSubmitClick = (event) =>{
@@ -121,24 +123,13 @@ class Event extends React.Component{
         )
     }
 
-    // componentDidUpdate(nextProps) {
-    //     console.log("update");
-    //     console.log(nextProps);
-    //     if (nextProps.event !== this.props.event) {
-    //         console.log("update2");
-    //       this.setState({ event: nextProps.event.repeat })
-    //     }
-    //     console.log(this.state.event);
-    // }
 
     render(){
-        
+        const {selectOption} = this.state.event.remind;
 
         return(
             <div className = "container">  
-                <Header
-                 heading = "Create Event"/>
-                <form>
+                <form  className="needs-validation">
                     <div className = "form-group">
                         <input
                             className="form-control col-10"
@@ -253,11 +244,25 @@ class Event extends React.Component{
                     <div className = "row">
                          <div className = "form-group row">
                          <label htmlFor="remind" className="col-sm-2 col-form-label">Remind</label>
-                             <Select
+                             {/* <Select
+                             className = "option col-4"
                              options = {this.state.remindOption}
                              name = "remind" 
-                             value = {this.state.event.remind}
-                             onChange = {(ev) => this.handleInputChange(ev)}/>
+                             value = {selectOption}
+                             onChange= {this.handleSelectRemind}/> */}
+                            <select className = "form-control option col-4"
+                                    name = "remind"
+                                    value = {this.state.event.remind}
+                                    onChange = {this.handleInputChange}>
+                                   {this.state.remindOption.map(optionItem =>(
+                                            <option 
+                                            id = {optionItem.id} 
+                                            value = {optionItem.id}
+                                            key = {optionItem.id}                        
+                                            > {optionItem.option} 
+                                            </option> 
+                                   ))}
+                            </select>
                             
                          </div>               
                     </div>
@@ -265,9 +270,22 @@ class Event extends React.Component{
                     <div className = "row">
                          <div className = "form-group row">
                          <label htmlFor="Select" className="col-sm-2 col-form-label">Type</label>
-                             <Select
+                             {/* <Select
                              options = {this.state.eventType}
-                             />
+                             /> */}   <select className = "select form-control option col-4"
+                             name = "type"
+                             value = {this.state.event.type}
+                             onChange = {this.handleInputChange}>
+                            {this.state.eventType.map(optionItem =>(
+                                     <option 
+                                     id = {optionItem.id} 
+                                     value = {optionItem.id}
+                                     key = {optionItem.id}                                     
+                                     > {optionItem.option}
+                                     </option> 
+                            ))}
+                     </select>
+
                             
                          </div>               
                     </div>

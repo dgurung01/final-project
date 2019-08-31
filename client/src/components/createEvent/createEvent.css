@@ -22,7 +22,7 @@
 
 .form-group .col-8{
     margin-top :20px;
-    margin-left: 10px;
+    /* margin-left: 5px; */
 }
 
 .iconButton{
@@ -39,4 +39,14 @@
 .btnRow{
     margin-top:50px;
     margin-left: 50px;
+}
+
+.option{
+    margin-top : 10px;
+    padding-left: 10px;
+    margin-left : 10px;
+}
+
+.select{
+    font-family: 'FontAwesome', 'Second Font name'
 }

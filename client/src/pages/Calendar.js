@@ -1,23 +1,130 @@
 import React from "react";
 import {format, addMonths, subMonths, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isSameDay, isSameMonth, parse, addDays} from "date-fns";
 
-import events from "../events.json";
-import PTags from "../components/pTags/PTags.js";
+
+// import events from "../events.json";
+import ButtonTag from "../components/ButtonTag/ButtonTag";
+import Modal from "../components/Modal/Modal";
+import CreateEvent from "../components/createEvent/createEvent.js";
+import API from "../utils/API";
 
 import "./css/calendar.css";
+import EventModal from "../components/EventModal/EventModal";
+// import "../components/Modal/Modal.css"
 
 
 class Calendar extends React.Component {
   
   state = {
-        events,
+        events : [],
         currentMonth: new Date(),
         selectedDate: new Date(),
+        show : false,
+        modalType : "",
+        eventId : "",
+        clickedEvent : []
         
   };
   
 
+  openModalHandler = () => {
+    
+    this.setState({
+        show: true
+    });
+    this.setState({modalType : "C"});
+  }
+
+
+  openEventModal = (event) => {
+ 
+    this.setState({
+        show: true
+    });
+    this.setState({modalType : "E"});
+    this.setState({eventId : event.target.id});
+    this.getEvents(event.target.id);
+  }
+
+  closeModalHandler = () => {
+    this.setState({
+        show: false
+    });
+  }
+
+  componentWillMount = () => {
+    this.getEvents();
+    
+  }
+
+
+  onDateClick = day => {
+
+    this.setState({
+        selectedDate: day
+      });
+    
+  }
+
+
+  nextMonth = () => {
+    this.setState({
+        currentMonth: addMonths(this.state.currentMonth, 1)
+      });
+  }
+
+  prevMonth = () => {
+    this.setState({
+        currentMonth: subMonths(this.state.currentMonth, 1)
+      });
+  }
+
+  getEvents = (id) => {
+    
+    API.getEvents(id)
+    .then(res =>{
+      
+      if (id) {
+        this.setState({clickedEvent : res.data})
+      }     else{
+      this.setState({
+        events: res.data
+      });  }   
+    })
+    .catch(() =>
+      this.setState({
+        Events: []
+      })
+    );
+};
+
+
+
+  renderModal(){
   
+    return (
+      <div className="newevent">      
+        <Modal
+            className="modal"
+            show={this.state.show}
+            close={this.closeModalHandler}
+            type = {this.state.modalType}>
+               {this.state.modalType === "C" ? 
+                <CreateEvent                  
+                  close = {this.closeModalHandler}                  
+                />
+               : 
+               <EventModal 
+                id = {this.state.eventId}    
+                event = {this.state.clickedEvent}          
+                close = {this.closeModalHandler}
+              /> 
+    }
+        </Modal>
+      </div>
+    );
+  }
+
 
   renderHeader() {
     const dateFormat = "MMMM yyyy";
@@ -26,6 +133,9 @@ class Calendar extends React.Component {
        
 
         <div className="header row flex-middle">
+
+          <button className="col-2 btn btn-lg btn-link" onClick={(ev) => this.openModalHandler("C")}>New Event</button>
+
           <div className="col col-start">
             <div className="icon" onClick={this.prevMonth}>
               chevron_left
@@ -47,9 +157,11 @@ class Calendar extends React.Component {
 
 
   renderDays() {
-    const dateFormat = "dddd";
+    const dateFormat = "iiii";
     const days = [];
     let startDate = startOfWeek(this.state.currentMonth);
+    
+   
     for (let i = 0; i < 7; i++) {
       days.push(
         <div className="col col-center" key={i}>
@@ -71,7 +183,6 @@ class Calendar extends React.Component {
     const eventList = this.state.events;
 
     
-
     const dateFormat = "d";
     const rows = [];
     let days = [];
@@ -83,9 +194,11 @@ class Calendar extends React.Component {
     for (let i = 0; i < 7; i++) {
         formattedDate = format(day, dateFormat);
         
+       
         const cloneDay = day;
-        const daysEvents = eventList.filter((eventOne) => eventOne.startDate === format(cloneDay, "MM-dd-yyyy"));
         
+        const daysEvents = eventList.filter((eventOne) => (eventOne.startDate).split("T")[0] === format(cloneDay,"yyyy-MM-dd"));
+                
 
         days.push(
         <div
@@ -95,13 +208,17 @@ class Calendar extends React.Component {
                 : isSameDay(day, selectedDate) ? "selected" : ""
             }`}
             key={day}
-            onClick={() => this.onDateClick(parse(cloneDay))}
+            onClick={() => this.onDateClick(parse(cloneDay,'MM/dd/yyyy',
+            new Date()))}
         >
            
            <div className = "eventDiv">
-                {daysEvents.map(today => (    
-                   <PTags
-                   event = {today}/>
+                {daysEvents.map(today => (                  
+                   <ButtonTag
+                   id = {today.id}
+                   evntType = {"C"}                   
+                   event = {today}
+                   onClick = {(ev) =>this.openEventModal(ev)}/>
 
                 ))}
            </div>
@@ -125,40 +242,17 @@ class Calendar extends React.Component {
     return <div className="body">{rows}</div>;
   }
 
-
-  onDateClick = day => {
-
-    this.setState({
-        selectedDate: day
-      });
-    //   console.log(this.state.selectedDate);
-  }
-
-
-
-  nextMonth = () => {
-    this.setState({
-        currentMonth: addMonths(this.state.currentMonth, 1)
-      });
-  }
-
-  prevMonth = () => {
-    this.setState({
-        currentMonth: subMonths(this.state.currentMonth, 1)
-      });
-  }
-
+  
   render() {
+
     return (
       <div>
-        <div className="col-2 col-start">
-          <div className = "newEvent"><a href="#" >New event</a></div>
-        </div>
+        { this.state.show ? this.renderModal():""}
 
         <div className=" container calendar">
-        {this.renderHeader()}
-        {this.renderDays()}
-        {this.renderCells()}
+          {this.renderHeader()}
+          {this.renderDays()}
+          {this.renderCells()}
       </div>
       </div>
         
