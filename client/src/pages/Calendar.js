@@ -3,12 +3,13 @@ import {format, addMonths, subMonths, startOfWeek, endOfWeek, startOfMonth, endO
 
 
 // import events from "../events.json";
-import PTags from "../components/pTags/PTags.js";
+import ButtonTag from "../components/ButtonTag/ButtonTag";
 import Modal from "../components/Modal/Modal";
 import CreateEvent from "../components/createEvent/createEvent.js";
 import API from "../utils/API";
 
 import "./css/calendar.css";
+import EventModal from "../components/EventModal/EventModal";
 // import "../components/Modal/Modal.css"
 
 
@@ -18,15 +19,31 @@ class Calendar extends React.Component {
         events : [],
         currentMonth: new Date(),
         selectedDate: new Date(),
-        show : false
+        show : false,
+        modalType : "",
+        eventId : "",
+        clickedEvent : []
         
   };
   
 
   openModalHandler = () => {
+    
     this.setState({
         show: true
     });
+    this.setState({modalType : "C"});
+  }
+
+
+  openEventModal = (event) => {
+ 
+    this.setState({
+        show: true
+    });
+    this.setState({modalType : "E"});
+    this.setState({eventId : event.target.id});
+    this.getEvents(event.target.id);
   }
 
   closeModalHandler = () => {
@@ -40,17 +57,69 @@ class Calendar extends React.Component {
     
   }
 
-  
+
+  onDateClick = day => {
+
+    this.setState({
+        selectedDate: day
+      });
+    
+  }
+
+
+  nextMonth = () => {
+    this.setState({
+        currentMonth: addMonths(this.state.currentMonth, 1)
+      });
+  }
+
+  prevMonth = () => {
+    this.setState({
+        currentMonth: subMonths(this.state.currentMonth, 1)
+      });
+  }
+
+  getEvents = (id) => {
+    
+    API.getEvents(id)
+    .then(res =>{
+      
+      if (id) {
+        this.setState({clickedEvent : res.data})
+      }     else{
+      this.setState({
+        events: res.data
+      });  }   
+    })
+    .catch(() =>
+      this.setState({
+        Events: []
+      })
+    );
+};
+
+
+
   renderModal(){
+  
     return (
       <div className="newevent">      
         <Modal
             className="modal"
             show={this.state.show}
-            close={this.closeModalHandler}>
-                <CreateEvent
-                  close = {this.closeModalHandler}
+            close={this.closeModalHandler}
+            type = {this.state.modalType}>
+               {this.state.modalType === "C" ? 
+                <CreateEvent                  
+                  close = {this.closeModalHandler}                  
                 />
+               : 
+               <EventModal 
+                id = {this.state.eventId}    
+                event = {this.state.clickedEvent}          
+                close = {this.closeModalHandler}
+              /> 
+    }
         </Modal>
       </div>
     );
@@ -65,7 +134,7 @@ class Calendar extends React.Component {
 
         <div className="header row flex-middle">
 
-          <button className="col-2 btn btn-lg btn-link" onClick={this.openModalHandler}>New Event</button>
+          <button className="col-2 btn btn-lg btn-link" onClick={(ev) => this.openModalHandler("C")}>New Event</button>
 
           <div className="col col-start">
             <div className="icon" onClick={this.prevMonth}>
@@ -145,8 +214,11 @@ class Calendar extends React.Component {
            
            <div className = "eventDiv">
                 {daysEvents.map(today => (                  
-                   <PTags
-                   event = {today}/>
+                   <ButtonTag
+                   id = {today.id}
+                   evntType = {"C"}                   
+                   event = {today}
+                   onClick = {(ev) =>this.openEventModal(ev)}/>
 
                 ))}
            </div>
@@ -170,45 +242,9 @@ class Calendar extends React.Component {
     return <div className="body">{rows}</div>;
   }
 
-
-  onDateClick = day => {
-
-    this.setState({
-        selectedDate: day
-      });
-    
-  }
-
-
-
-  nextMonth = () => {
-    this.setState({
-        currentMonth: addMonths(this.state.currentMonth, 1)
-      });
-  }
-
-  prevMonth = () => {
-    this.setState({
-        currentMonth: subMonths(this.state.currentMonth, 1)
-      });
-  }
-
-  getEvents = () => {
-    API.getEvents()
-    .then(res =>{     
-      this.setState({
-        events: res.data
-      });     
-    })
-    .catch(() =>
-      this.setState({
-        Events: []
-      })
-    );
-};
-
   
   render() {
+
     return (
       <div>
         { this.state.show ? this.renderModal():""}
