@@ -259,7 +259,7 @@ class Event extends React.Component{
                                             id = {optionItem.id} 
                                             value = {optionItem.id}
                                             key = {optionItem.id}                        
-                                            > {optionItem.option}
+                                            > {optionItem.option} 
                                             </option> 
                                    ))}
                             </select>
@@ -272,7 +272,7 @@ class Event extends React.Component{
                          <label htmlFor="Select" className="col-sm-2 col-form-label">Type</label>
                              {/* <Select
                              options = {this.state.eventType}
-                             /> */}   <select className = "form-control option col-4"
+                             /> */}   <select className = "select form-control option col-4"
                              name = "type"
                              value = {this.state.event.type}
                              onChange = {this.handleInputChange}>
@@ -280,7 +280,7 @@ class Event extends React.Component{
                                      <option 
                                      id = {optionItem.id} 
                                      value = {optionItem.id}
-                                     key = {optionItem.id}                        
+                                     key = {optionItem.id}                                     
                                      > {optionItem.option}
                                      </option> 
                             ))}

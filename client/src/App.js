@@ -27,7 +27,6 @@ class App extends React.Component{
   DefaultContainer = () => {
     return(
       <div>
-      {/* <Header toggleAlert={this.toggleAlert} /> */}
       <div className="container">
         <Navbar />
         <Route exact path="/about" component={About} />
@@ -35,8 +34,7 @@ class App extends React.Component{
         <Route exact path="/search" component={Search} />
         <Route exact path="/event" component={Event} />
         <Route exact path="/todo" component={Todo} />
-
-        {/* {this.state.isAlertOpen ? <Alert /> : null} */}
+       
       </div>
       </div>
     )  
@@ -48,7 +46,7 @@ class App extends React.Component{
       <Switch>
       <div className="App">
         <Route exact path="/" component={Home}/>      
-        <Route exact path = {"/(calendar)" || "/(about)"} component={this.DefaultContainer}/>
+        <Route exact path = "/(calendar)" component={this.DefaultContainer}/>
         <Route exact path = "/(todo)" component={this.DefaultContainer}/>
     
       </div>
