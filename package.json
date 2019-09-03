@@ -28,10 +28,10 @@
     "flash": "^1.1.0",
     "gh-pages": "^2.1.1",
     "if-env": "^1.0.4",
+    "mysql2": "^1.7.0",
     "passport": "^0.4.0",
     "passport-auth0": "^1.2.1",
     "pug": "^2.0.4",
-    "mysql2": "^1.7.0",
     "sequelize": "^5.17.1"
   }
 }
