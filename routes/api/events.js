@@ -29,6 +29,18 @@ router.route("/:id")
           res.json(dbEvent)
         })
         .catch(err => res.status(422).json(err))
-      });
+      })
+
+      .delete(function(req,res){
+        db.Events.destroy({
+          where : {
+            id : req.params.id
+          }
+        })
+        .then(dbEvent => {
+          res.json(dbEvent)
+        })
+        .catch(err => res.status(422).json(err));
+      })
 
 module.exports = router;

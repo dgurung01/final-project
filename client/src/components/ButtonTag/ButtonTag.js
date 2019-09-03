@@ -10,6 +10,7 @@ class ButtonTags extends React.Component{
        
         const id = this.props.event.eventType;
         const eventType = EventType.filter((event) => event.id === id);
+        // console.log(eventType[0].icon);
         return eventType[0].icon;
     }
     

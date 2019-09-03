@@ -1,4 +1,5 @@
 import axios from "axios";
+import { func } from "prop-types";
 
 // Export an object containing methods we'll use for accessing the Dog.Ceo API
 
@@ -15,7 +16,10 @@ export default {
     }
     else {    
       return  axios.get("/api/events" );
-    }
-    
+    }    
+  },
+
+  deleteEvent : function (id) {
+    return axios.delete("/api/events/" + id);
   }
 };
