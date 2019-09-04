@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import Event from "./components/createEvent/createEvent";
 import Todo from "./pages/Todo";
+import formpage from "./pages/formpage";
 
 
 class App extends React.Component{
@@ -34,6 +35,7 @@ class App extends React.Component{
         <Route exact path="/search" component={Search} />
         <Route exact path="/event" component={Event} />
         <Route exact path="/todo" component={Todo} />
+        <Route exact path="/formpage" component={formpage} />
        
       </div>
       </div>
