@@ -12,7 +12,13 @@ class TodoList extends React.Component{
 	toggleComplete = (nodeId) => {
 		this.props.toggleComplete(nodeId);
 		return;
-    }
+	}
+	
+	setEvent = (nodeId) => {
+		console.log(nodeId);
+		this.props.setEvent(nodeId);
+		return;
+	}
     
 	render() {
 		var listNodes = this.props.data.map(function (listItem) {
@@ -23,7 +29,8 @@ class TodoList extends React.Component{
 					task={listItem.taskName} 
 					status={listItem.status} 
 					removeNode={this.removeNode} 
-					toggleComplete={this.toggleComplete} />
+					toggleComplete={this.toggleComplete}
+					setEvent = {this.setEvent} />
 			);
 		},this);
 		return (

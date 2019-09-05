@@ -2,6 +2,9 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
+import CreateEvent from "../createEvent/createEvent";
+import Modal from "../Modal/Modal";
+
 
 import API from "../../utils/API";
 
@@ -10,8 +13,12 @@ import "./todo.css";
 class TodoBox extends React.Component{
 
   state = {
-    data: []
+	data: [],
+	show : false,
+	taskName : "",
+	taskId : ""
   }
+
 
 	getTodos = (userId) =>{
 		
@@ -94,14 +101,59 @@ class TodoBox extends React.Component{
   }
   
 
+  createEvent = (nodeId) =>{
+	var data = this.state.data;
+	data = data.filter(function (el) {
+		return el.id === nodeId;
+	});
+
+	this.setState({
+		show: true,		
+		taskId : nodeId,
+		taskName : data[0].taskName
+	});
+    return;
+  }
+
+  renderModal(){
+  
+    return (
+      <div className="newevent">      
+        <Modal
+            className="modal"
+            show={this.state.show}
+            close={this.closeModalHandler}
+		>
+            <CreateEvent                  
+				close = {this.closeModalHandler}   
+				taskName = {this.state.taskName}
+				taskId = {this.state.taskId}               
+            />               
+        </Modal>
+      </div>
+    );
+  }
+
+  closeModalHandler = () => {
+    this.setState({
+        show: false
+    });
+  }
+
+
+
 	render() {
 		return (
-			<div className="well">
-				{/* <h1 className="vert-offset-top-0">To do:</h1> */}
-				<TodoList data={this.state.data} 
-						  removeNode={this.handleNodeRemoval} 
-						  toggleComplete={this.handleToggleComplete} />
-				<TodoForm onTaskSubmit={this.handleSubmit} />
+			<div>
+				{ this.state.show ? this.renderModal():""}
+			
+				<div className="well">				
+					<TodoList data={this.state.data} 
+							removeNode={this.handleNodeRemoval} 
+							toggleComplete={this.handleToggleComplete} 
+							setEvent = {this.createEvent}/>
+					<TodoForm onTaskSubmit={this.handleSubmit} />
+				</div>
 			</div>
 		);
 	}

@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     } ,
     parentId : {
         type : DataTypes.INTEGER
-    } 
+    },
+    phoneNo : DataTypes.STRING 
     
   });
   

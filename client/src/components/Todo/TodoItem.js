@@ -14,12 +14,17 @@ class TodoItem extends React.Component{
 		return;
     }
     
-	updateClass = function () {
-		
-    }
-    
+	
+	setEvent = (e) => {
+		e.preventDefault();
+		console.log(this.props.nodeId);
+		this.props.setEvent(this.props.nodeId);
+		return;
+	}
+
+
 	render() {
-		console.log(this.props.status);
+		
 		var classes = 'list-group-item clearfix ';
 		if (this.props.status === 'C') {
 			classes = classes + 'list-group-item-success';
@@ -35,7 +40,13 @@ class TodoItem extends React.Component{
 					<button 
 						type="button" 
 						className="btn btn-xs btn-danger img-circle" 
-						onClick={this.removeNode}>&#xff38;</button>
+						onClick={this.removeNode}>&#xff38;
+					</button>
+					<button 
+						type="button" 
+						className="btn btn-xs btn-basic img-circle" 
+						onClick={this.setEvent}>&#x23F0;
+					</button>
 				</div>
 			</li>
 		);
