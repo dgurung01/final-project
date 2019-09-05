@@ -30,12 +30,15 @@ module.exports = (sequelize, DataTypes) => {
         type : DataTypes.TEXT
     } ,
     eventType : {
-        type : DataTypes.STRING,
+        type : DataTypes.STRING
         // allowNull : false
     },
     userId : {
-        type : DataTypes.INTEGER,
+        type : DataTypes.INTEGER
         // allowNull : false
+    },
+    todoId : {
+        type : DataTypes.INTEGER
     }
   });
   

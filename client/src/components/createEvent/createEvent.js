@@ -3,8 +3,7 @@ import {format, addHours, addDays,parseISO,isValid} from "date-fns";
 
 import Header from "../header/header.js";
 import "./createEvent.css";
-//import Select from "../selectOption/SelectOption";
-//  import Select from "react-select";
+
 
 import API from "../../utils/API.js"
 
@@ -28,6 +27,7 @@ class Event extends React.Component{
                 notes : "",
                 remind : "1",
                 type : "1",
+                todoId : "",
                 invities : []
             },        
             repeatOption,
@@ -57,16 +57,22 @@ class Event extends React.Component{
     //    get the current time and add an hour
         const endingTime  = format(addHours(date,1),timeFormat);
        
+        // if(this.props.taskId){
+        //     const eventTitle = 
+        // }
 
         this.setState ({event : {...this.state.event, 
                         startDate: currentDate,
                         endDate : currentDate,
                         startTime :currentTime,
-                        endTime : endingTime
+                        endTime : endingTime,
+                        eventTitle : this.props.taskName,
+                        todoId : this.props.taskId
                         
                     }});
         
     }
+
 
     handleInputChange = ev =>{
        
@@ -112,7 +118,7 @@ class Event extends React.Component{
     onSubmitClick = (event) =>{
         event.preventDefault();
         let newEvent = this.state.event;
-
+        console.log(newEvent);
         let eventData = {
             eventName : newEvent.eventTitle,
             startDate : Date.parse(`${newEvent.startDate} ${newEvent.startTime}`),
@@ -122,7 +128,8 @@ class Event extends React.Component{
             remindOpt_id : newEvent.remind,
             notes : newEvent.type,
             userId : this.state.userId,
-            eventType : newEvent.type
+            eventType : newEvent.type,
+            todoId : newEvent.todoId
             
         };
 

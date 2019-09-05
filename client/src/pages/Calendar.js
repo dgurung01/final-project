@@ -254,6 +254,7 @@ class Calendar extends React.Component {
           {this.renderDays()}
           {this.renderCells()}
       </div>
+        
       </div>
         
     );

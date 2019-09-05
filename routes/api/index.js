@@ -4,9 +4,10 @@
 const path = require ("path");
 const router = require("express").Router();
 const eventRoutes = require("./events");
+const todoRouters = require("./todos");
 
 router.use("/events", eventRoutes);
-
+router.use("/todos",todoRouters);
 
 // For anything else, render the html page
 router.use(function(req, res) {

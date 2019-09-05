@@ -21,5 +21,22 @@ export default {
 
   deleteEvent : function (id) {
     return axios.delete("/api/events/" + id);
+  },
+
+  saveToDo : function(todoData){
+    return axios.post("/api/todos",todoData);
+  },
+
+  getTodos : function(userId){
+    
+    return axios.get("/api/todos/" + userId);
+  },
+
+  updateTodo : function(id){
+      return axios.put("/api/todos/" + id);
+  },
+
+  deleteTodo : function(id){
+    return axios.delete("/api/todos/" + id);
   }
 };
