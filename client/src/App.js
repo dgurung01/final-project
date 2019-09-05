@@ -27,7 +27,7 @@ class App extends React.Component{
   DefaultContainer = () => {
     return(
       <div>
-      <div className="container">
+      <div className="container-fluid">
         <Navbar />
         <Route exact path="/about" component={About} />
         <Route exact path="/calendar" component={Calendar} />

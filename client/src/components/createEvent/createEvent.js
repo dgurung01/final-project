@@ -3,8 +3,7 @@ import {format, addHours, addDays,parseISO,isValid} from "date-fns";
 
 import Header from "../header/header.js";
 import "./createEvent.css";
-//import Select from "../selectOption/SelectOption";
-//  import Select from "react-select";
+
 
 import API from "../../utils/API.js"
 
