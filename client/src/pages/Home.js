@@ -100,6 +100,24 @@ class home extends React.Component {
                         <div className="text-center mt-4">
                         <MDBBtn rounded color="info">Login</MDBBtn>
             </div>
+            
+
+
+
+            <div class="modal-footer mx-5 pt-3 mb-1">
+      <p class="font-small grey-text d-flex justify-content-end">Not a member? <a href="#" class="blue-text ml-1">
+          Sign Up</a></p>
+    </div>
+
+
+          {/* <div className="signup">
+          Don't have an account?   
+          <MDBBtn rounded color="info">Sign Up</MDBBtn>
+
+
+
+
+          </div> */}
                       </MDBCardBody>
                     </MDBCard>
                   </MDBAnimation>

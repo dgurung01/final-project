@@ -25,6 +25,9 @@
     "if-env": "^1.0.4",
     "mdbreact": "^4.19.1",
     "mysql2": "^1.7.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "reactstrap": "^8.0.1",
     "sequelize": "^5.17.1"
   }
 }

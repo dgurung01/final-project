@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 import Event from "./components/createEvent/createEvent";
 import Todo from "./pages/Todo";
-import formpage from "./pages/formpage";
+import Formpage from "./pages/Formpage";
 
 
 class App extends React.Component{
@@ -20,6 +20,8 @@ class App extends React.Component{
       <div className="container">
       {/* <Route exact path="/" render={() => <Redirect to="/Home" />} /> */}
       <Route exact path="/" component={Home} />
+
+
     </div>
     )
 
@@ -35,7 +37,7 @@ class App extends React.Component{
         <Route exact path="/search" component={Search} />
         <Route exact path="/event" component={Event} />
         <Route exact path="/todo" component={Todo} />
-        <Route exact path="/formpage" component={formpage} />
+        <Route exact path="/formpage" component={Formpage} />
        
       </div>
       </div>
@@ -50,7 +52,8 @@ class App extends React.Component{
         <Route exact path="/" component={Home}/>      
         <Route exact path = "/(calendar)" component={this.DefaultContainer}/>
         <Route exact path = "/(todo)" component={this.DefaultContainer}/>
-    
+        <Route exact path="/formpage" component={Formpage}/>
+
       </div>
       </Switch>
       </Router>
