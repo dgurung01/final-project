@@ -1,5 +1,8 @@
 'use strict';
 
+var express = require('express');
+var router = express.Router();
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -35,3 +38,10 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+/* GET home page. */
+router.get('/', function (req, res, next) {
+  res.render('index', { title: 'Auth0 Webapp sample Nodejs' });
+});
+
+module.exports = router;
