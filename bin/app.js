@@ -13,6 +13,7 @@ var authRouter = require('./routes/auth');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+dotenv.config();
 dotenv.load();
 //..
 app.use(userInViews());
