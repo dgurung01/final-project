@@ -1,6 +1,6 @@
 
 var express = require('express');
-var secured = require('../lib/middleware/secured');
+var secured = require('../LibMiddleware/secured');
 var router = express.Router();
 'use strict';
 module.exports = (sequelize, DataTypes) => {
